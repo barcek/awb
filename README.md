@@ -1,8 +1,8 @@
-# Awb
+# awb
 
 A library exposing a monad to generate, transform and serialize DOM trees.
 
-# Why?
+## Why?
 
 To help automate web development. It can be used as part of a model-driven approach with [thru.js](https://github.com/barcek/thru.js), to generate code in HTML thru file methods.
 
