@@ -1,0 +1,34 @@
+{
+  "name": "awb",
+  "version": "1.0.0",
+  "description": "monadic DOM tree transformer",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "tsc -w",
+    "build": "tsc",
+    "test": "mocha --recursive"
+  },
+  "keywords": [
+    "DOM",
+    "DOM tree",
+    "traversal",
+    "transformation",
+    "monad",
+    "functional programming"
+  ],
+  "author": "barcek",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/barcek/awb.git"
+  },
+  "dependencies": {
+    "js-beautify": "^1.13.5",
+    "jsdom": "^16.5.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.4.0"
+  }
+}
