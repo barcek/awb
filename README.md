@@ -4,9 +4,9 @@ A library exposing a monad to generate, transform and serialize DOM trees.
 
 ## Why?
 
-To help automate web development. It can be used as part of a model-driven approach with [thru.js](https://github.com/barcek/thru.js), to generate code in HTML thru file methods.
+To help automate web development. It can be used as part of a model-driven approach with [thru.js](https://github.com/barcek/thru.js), to generate content from HTML thru file methods.
 
-It also offers a fresh perspective on things, not least as an example of the monad. The top level code is simpler than might be imagined and worth a look if you're starting out with functional programming and interested in seeing another monad in practice. The module 'utils.js' also has an example of `pipe`.
+It may also offer a fresh perspective on things, not least as an example of the monad. The top level code is simpler than might be imagined and worth a look if you're starting out with functional programming and interested in seeing another monad in practice. The module 'utils.js' also has an example of `pipe`.
 
 ## Getting started
 
@@ -17,16 +17,16 @@ Seed a new tree with an HTML string or template object passed into the `.sow` me
 With an HTML string:
 
 ```js
-Awb.sow('<p id="seed">Planting a seed.</p>')
+Awb.sow('<p id="seed">Planting a seed.</p>');
 ```
 
 With a template object:
 
 ```js
-Awb.sow({ n: 'p', as: { id: 'seed'}, t: 'Planting a seed.'}, ds: [])
+Awb.sow({ n: 'p', as: { id: 'seed'}, t: 'Planting a seed.', ds: [] });
 ```
 
-Here `n` is the element name, `as` any attributes to be set, `t` any text content and `ds` any dependents in the same format. Classes can be added as an array of strings on the attribute object's  `cs` key.
+Here `n` is the element name, `as` any attributes to be set, `t` any text content and `ds` any dependents, nested in the same format. Classes can be added as an array of strings on the attribute object's  `cs` key.
 
 With an existing DOM tree:
 
@@ -40,11 +40,11 @@ Use the `.serialize` method to get the final HTML as a string, passing in an int
 
 ## There's more...
 
-The `.DOMTree` property can be accessed directly or via the `.join` method, which is used to unpack the value from any Awb instance at each element on the tree.
+The `.DOMTree` property can be accessed directly or via the `.join` method, which unwraps the value from the Awb instance.
 
-The `.chain` method is built from `.map` and `.join` and can be used in place of `.map` where the mapping function instantiates new awbs in the DOM tree, to flatten the whole back to a single instance.
+The `.chain` method is built from `.map` and `.join` and can be used in place of `.map` where the mapping function instantiates an awb around an element in the DOM tree - the use of `.join` unwraps the value of each such instance once the mapping is complete. If that value is an element, not another level of instance, this flattens the whole tree bar the root element, which is wrapped as it was before the mapping.
 
-More element handlers for `.map` and `.chain` to follow.
+More methods and element handlers for `.map` and `.chain` to follow.
 
 ## Test files
 
