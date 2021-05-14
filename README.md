@@ -59,3 +59,25 @@ This command along with the `--recursive` flag is the current content of the 'te
 ```shell
 npm test
 ```
+
+## Repository tree
+
+```
+./
+├── lib
+│   ├── awb.js
+│   ├── get.js
+│   ├── index.js
+│   ├── set.js
+│   ├── use.js
+│   └── utils.js
+├── test
+│   ├── awb.test.js
+│   └── src.test.js
+├── .gitignore
+├── LICENSE.txt
+├── README.md
+├── index.js
+├── package-lock.json
+└── package.json
+```
