@@ -60,6 +60,12 @@ This command along with the `--recursive` flag is the current content of the 'te
 npm test
 ```
 
+The command in the 'watch' script is set up to watch for and test on changes:
+
+```shell
+npm run watch
+```
+
 ## Repository tree
 
 ```
