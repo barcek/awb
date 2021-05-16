@@ -1,12 +1,11 @@
 {
   "name": "awb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "monadic DOM tree transformer",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "tsc -w",
-    "build": "tsc",
+    "watch": "mocha --watch --parallel --recursive",
     "test": "mocha --recursive"
   },
   "keywords": [
