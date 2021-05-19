@@ -87,7 +87,7 @@ describe('Awb (constructor)', () => {
             it('returns an instance with the corresponding changes mapped ' +
                 'to the DOMTree property if passed a function', () => {
                 const DOMTree = vals.tree.ify(vals.tmpl.list);
-                let awbMapResult = Awb.of(DOMTree).map(fns.cAdder);
+                const awbMapResult = Awb.of(DOMTree).map(fns.cAdder);
                 assert.equal(awbMapResult.DOMTree.outerHTML, vals.html.listCAdded);
             });
         });
