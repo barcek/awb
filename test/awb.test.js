@@ -77,18 +77,31 @@ describe('Awb (constructor)', () => {
 
         describe('.map (method)', () => {
 
-            it('returns an instance with no changes mapped ' +
-                'to the DOMTree property if passed no function', () => {
+            it('returns an instance with no changes made ' +
+                'to the DOMTree property if passed no arguments', () => {
                 const DOMTree = vals.tree.ify(vals.tmpl.list);
                 const awbMapEmptyResult = Awb.of(DOMTree).map();
                 assert.equal(awbMapEmptyResult.DOMTree.outerHTML, vals.html.list);
             });
 
-            it('returns an instance with the corresponding changes mapped ' +
-                'to the DOMTree property if passed a function', () => {
+            it('returns an instance with the corresponding changes made ' +
+                'to the DOMTree property if passed a function only', () => {
                 const DOMTree = vals.tree.ify(vals.tmpl.list);
                 const awbMapResult = Awb.of(DOMTree).map(fns.cAdder);
                 assert.equal(awbMapResult.DOMTree.outerHTML, vals.html.listCAdded);
+            });
+
+            it('returns an instance with the corresponding changes made ' +
+                'to the DOMTree property if passed a function and false', () => {
+                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const awbMapResult = Awb.of(DOMTree).map(fns.cAdder, false);
+                assert.equal(awbMapResult.DOMTree.outerHTML, vals.html.listCAddedNotTree);
+            });
+
+            it('returns a function if passed a curried function and false', () => {
+                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const awbMapResult = Awb.of(DOMTree).map(fns.tAppender, false);
+                assert.isFunction(awbMapResult.DOMTree);
             });
         });
 
@@ -103,18 +116,25 @@ describe('Awb (constructor)', () => {
 
         describe('.chain (method)', () => {
 
-            it('returns an instance with no changes mapped ' +
+            it('returns an instance with no changes made ' +
                 'to the DOMTree property if passed a function returning an instance', () => {
                 const DOMTree = vals.tree.ify(vals.tmpl.list);
                 const awbChainEmptyResult = Awb.of(DOMTree).chain();
                 assert.equal(awbChainEmptyResult.DOMTree.outerHTML, vals.html.list);
             });
 
-            it('returns an instance with the corresponding changes mapped ' +
-                'to the DOMTree property if passed a function returning an instance', () => {
+            it('returns an instance with the corresponding changes made ' +
+                'to the DOMTree property if passed only a function returning an instance', () => {
                 const DOMTree = vals.tree.ify(vals.tmpl.list);
                 const awbChainResult = Awb.of(DOMTree).chain(fns.liftCAdder);
                 assert.equal(awbChainResult.DOMTree.outerHTML, vals.html.listLiftCAdded);
+            });
+
+            it('returns an instance with the corresponding changes made ' +
+                'to the DOMTree property if passed a function returning an instance and false', () => {
+                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const awbChainResult = Awb.of(DOMTree).chain(fns.liftCAdder, false);
+                assert.equal(awbChainResult.DOMTree.outerHTML, vals.html.listLiftCAddedNotTree);
             });
         });
 

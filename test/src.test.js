@@ -15,7 +15,9 @@ const vals = {
 
         list: '<ul id="test-list-1-id" class="test-class-1 test-class-2"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id"><li>Test list 2 item 1 text.</li></ul></li></ul>',
         listCAdded: '<ul id="test-list-1-id" class="test-class-1 test-class-2 test-class-3"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id" class="test-class-3"><li>Test list 2 item 1 text.</li></ul></li></ul>',
+        listCAddedNotTree: '<ul id="test-list-1-id" class="test-class-1 test-class-2 test-class-3"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id"><li>Test list 2 item 1 text.</li></ul></li></ul>',
         listLiftCAdded: '<ul id="test-list-1-id" class="test-class-1 test-class-2"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id" class="test-class-3"><li>Test list 2 item 1 text.</li></ul></li></ul>',
+        listLiftCAddedNotTree: '<ul id="test-list-1-id" class="test-class-1 test-class-2"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id"><li>Test list 2 item 1 text.</li></ul></li></ul>',
         listIndent4: '<ul id="test-list-1-id" class="test-class-1 test-class-2">\n    <li>Test list 1 item 1 text.</li>\n    <li>\n        <ul id="test-list-2-id">\n            <li>Test list 2 item 1 text.</li>\n        </ul>\n    </li>\n</ul>'
     },
 
@@ -78,9 +80,12 @@ const liftCAdder = element => {
     return element;
 }
 
+const tAppender = DOMTree1 => element => {};
+
 const fns = {
     cAdder,
-    liftCAdder
+    liftCAdder,
+    tAppender
 };
 
 export {
