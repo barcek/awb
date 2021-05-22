@@ -71,6 +71,10 @@ describe('Awb (constructor)', () => {
             assert.isFunction(awbResult.join);
         });
 
+        it('has an ap method', () => {
+            assert.isFunction(awbResult.ap);
+        });
+
         it('has a serialize method', () => {
             assert.isFunction(awbResult.serialize);
         });
@@ -135,6 +139,29 @@ describe('Awb (constructor)', () => {
                 const DOMTree = vals.tree.ify(vals.tmpl.list);
                 const awbChainResult = Awb.of(DOMTree).chain(fns.liftCAdder, false);
                 assert.equal(awbChainResult.DOMTree.outerHTML, vals.html.listLiftCAddedNotTree);
+            });
+        });
+
+        describe('.ap (method)', () => {
+
+            it('returns an instance with the corresponding changes made ' +
+                'to the DOMTree property if holding a partially applied function & ' +
+                'passed an instance', () => {
+                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const instance = Awb.of(vals.tree.ify(vals.tmpl.list));
+                const awbApResult = Awb.of(fns.tAppender(DOMTree)).ap(instance);
+                assert.equal(awbApResult.DOMTree.outerHTML, vals.html.listTAppended);
+                vals.data.hasTAppended = false;
+            });
+
+            it('returns an instance with the corresponding changes made ' +
+                'to the DOMTree property if holding a partially applied function & ' +
+                'passed an instance and false', () => {
+                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const instance = Awb.of(vals.tree.ify(vals.tmpl.list));
+                const awbApResult = Awb.of(fns.tAppender(DOMTree)).ap(instance, false);
+                assert.equal(awbApResult.DOMTree.outerHTML, vals.html.listTAppendedNotTree);
+                vals.data.hasTAppended = false;
             });
         });
 
