@@ -44,7 +44,9 @@ The `.DOMTree` property can be accessed directly or via the `.join` method, whic
 
 The `.chain` method is built from `.map` and `.join` and can be used in place of `.map` where the mapping function instantiates an awb around an element in the DOM tree - the use of `.join` unwraps the value of each such instance once the mapping is complete. If that value is an element, not another level of instance, this flattens the whole tree bar the root element, which is wrapped as it was before the mapping.
 
-More methods and element handlers for `.map` and `.chain` to follow.
+The `.ap` method can be used to work with two or more trees, when the value in the instance is a partially applied function requiring one or more additional trees to complete, for example following a use of `.map` with a curried handler. The value in the Awb instance passed to `.ap` becomes the next argument.
+
+To follow: a `liftAN` method and handlers for `.ap`, `.map` and `.chain`.
 
 ## Test files
 
