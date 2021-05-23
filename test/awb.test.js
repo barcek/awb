@@ -71,7 +71,11 @@ describe('Awb (constructor)', () => {
             assert.isFunction(awbResult.join);
         });
 
-        it('has an ap method', () => {
+        it('has the chain method', () => {
+            assert.isFunction(awbResult.chain);
+        });
+
+        it('has the ap method', () => {
             assert.isFunction(awbResult.ap);
         });
 
