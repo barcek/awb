@@ -36,17 +36,39 @@ Awb.of(DOMTree);
 
 That done, transform away by chaining the `.map` method, passing in a function to be applied to every element in the tree.
 
+```js
+Awb.of(DOMTree).map(handleElement);
+```
+
 Use the `.serialize` method to get the final HTML as a string, passing in an integer for that number of spaces of indentation.
 
+```js
+const HTML = Awb.of(DOMTree).serialize(4);
+```
+
 ## There's more...
+
+### .join & .chain
 
 The `.DOMTree` property can be accessed directly or via the `.join` method, which unwraps the value from the Awb instance.
 
 The `.chain` method is built from `.map` and `.join` and can be used in place of `.map` where the mapping function instantiates an awb around an element in the DOM tree - the use of `.join` unwraps the value of each such instance once the mapping is complete. If that value is an element, not another level of instance, this flattens the whole tree bar the root element, which is wrapped as it was before the mapping.
 
+### .ap & .liftAN
+
 The `.ap` method can be used to work with two or more trees, when the value in the instance is a partially applied function requiring one or more additional trees to complete, for example following a use of `.map` with a curried handler. The value in the Awb instance passed to `.ap` becomes the next argument.
 
-To follow: a `liftAN` method and handlers for `.ap`, `.map` and `.chain`.
+```js
+Awb.of(DOMTree).map(useTrees).ap(instance);
+```
+
+The `.liftAN` method can combine multiple uses of `.ap` to apply a function to several additional instances. The function is the first argument to the method, followed by each instance to be passed to it.
+
+```js
+Awb.of(DOMTree).liftAN(useTrees, instance1, instance2);
+```
+
+To follow: handlers for the mapping methods and higher-level abstractions.
 
 ## Test files
 
