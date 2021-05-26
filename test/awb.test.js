@@ -4,7 +4,7 @@
 
 import { assert } from 'chai';
 
-import { vals, fns } from './src.test.js';
+import { utils, vals, fns } from './src.test.js';
 
 import Awb from '../lib/awb.js';
 
@@ -79,6 +79,10 @@ describe('Awb (constructor)', () => {
             assert.isFunction(awbResult.ap);
         });
 
+        it('has a liftAN method', () => {
+            assert.isFunction(awbResult.liftAN);
+        });
+
         it('has a serialize method', () => {
             assert.isFunction(awbResult.serialize);
         });
@@ -108,7 +112,8 @@ describe('Awb (constructor)', () => {
 
             it('returns a function if passed a curried function and false', () => {
                 const DOMTree = vals.tree.ify(vals.tmpl.list);
-                const awbMapResult = Awb.of(DOMTree).map(fns.tAppender, false);
+                const tAppender2 = utils.curryN(fns.tAppender, 1);
+                const awbMapResult = Awb.of(DOMTree).map(tAppender2, false);
                 assert.isFunction(awbMapResult.DOMTree);
             });
         });
@@ -153,8 +158,9 @@ describe('Awb (constructor)', () => {
                 'passed an instance', () => {
                 const DOMTree = vals.tree.ify(vals.tmpl.list);
                 const instance = Awb.of(vals.tree.ify(vals.tmpl.list));
-                const awbApResult = Awb.of(fns.tAppender(DOMTree)).ap(instance);
-                assert.equal(awbApResult.DOMTree.outerHTML, vals.html.listTAppended);
+                const tAppender2 = utils.curryN(fns.tAppender, 1);
+                const awbApResult = Awb.of(DOMTree).map(tAppender2).ap(instance);
+                assert.equal(awbApResult.DOMTree.outerHTML, vals.html.listTAppended2);
                 vals.data.hasTAppended = false;
             });
 
@@ -163,8 +169,34 @@ describe('Awb (constructor)', () => {
                 'passed an instance and false', () => {
                 const DOMTree = vals.tree.ify(vals.tmpl.list);
                 const instance = Awb.of(vals.tree.ify(vals.tmpl.list));
-                const awbApResult = Awb.of(fns.tAppender(DOMTree)).ap(instance, false);
-                assert.equal(awbApResult.DOMTree.outerHTML, vals.html.listTAppendedNotTree);
+                const tAppender2 = utils.curryN(fns.tAppender, 1)
+                const awbApResult = Awb.of(DOMTree).map(tAppender2).ap(instance, false);
+                assert.equal(awbApResult.DOMTree.outerHTML, vals.html.listTAppended2NotTree);
+                vals.data.hasTAppended = false;
+            });
+        });
+
+        describe('.liftAN (method)', () => {
+
+            it('returns an instance with the corresponding changes made ' +
+                'to the DOMTree property if passed a function & multiple instances', () => {
+                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const instance1 = Awb.of(vals.tree.ify(vals.tmpl.list));
+                const instance2 = Awb.of(vals.tree.ify(vals.tmpl.list));
+                const tAppender3 = utils.curryN(fns.tAppender, 2);
+                const awbLiftANResult = Awb.of(DOMTree).liftAN(tAppender3, instance1, instance2);
+                assert.equal(awbLiftANResult.DOMTree.outerHTML, vals.html.listTAppended3);
+                vals.data.hasTAppended = false;
+            });
+
+            it('returns an instance with the corresponding changes made ' +
+                'to the DOMTree property if passed a function, multiple instances & false', () => {
+                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const instance1 = Awb.of(vals.tree.ify(vals.tmpl.list));
+                const instance2 = Awb.of(vals.tree.ify(vals.tmpl.list));
+                const tAppender3 = utils.curryN(fns.tAppender, 2);
+                const awbLiftANResult = Awb.of(DOMTree).liftAN(tAppender3, instance1, instance2, false);
+                assert.equal(awbLiftANResult.DOMTree.outerHTML, vals.html.listTAppended3NotTree);
                 vals.data.hasTAppended = false;
             });
         });
