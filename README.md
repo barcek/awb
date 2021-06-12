@@ -10,7 +10,49 @@ It may also offer a fresh perspective on things, not least as an example of the 
 
 ## Getting started
 
-Import `Awb` - it's the default export.
+If you're comfortable cloning repositories, installing dependencies with npm and using ES modules, skip to [Working with DOMTrees](#working-with-domtrees).
+
+### Cloning the repository & installing dependencies
+
+You'll need Git & npm installed.
+
+First, enter the directory in which you'd like to store the library and run the Git command to clone the repository:
+
+```shell
+git clone https://github.com/barcek/awb.git
+```
+
+Next, enter the newly created 'awb' directory and run the npm command to install dependencies:
+
+```shell
+npm install
+```
+
+### Importing the library
+
+Import `Awb` from wherever the library is stored - it's the default export. The following line assumes the library is in the same directory as the importing file.
+
+```js
+import Awb from './awb/index.js';
+```
+
+It also assumes the importing file is an ES module, not a CommonJS module, i.e. that the file extension is '.mjs' or the 'package.json' for the file has the following top-level key-value pair:
+
+```json
+"type": "module"
+```
+
+If your file is a CommonJS module, it's possible to use the dynamic import statement `import(path)`, which returns a `Promise`. The `Awb` function can be found on the `default` property of the resolved value.
+
+```js
+import('./awb/index.js')
+  .then(value => {
+    const Awb = value.default;
+    ...
+  });
+```
+
+### Working with DOMTrees
 
 Seed a new tree with an HTML string or template object passed into the `.sow` method, or use the `.of` method to work with an existing tree.
 
