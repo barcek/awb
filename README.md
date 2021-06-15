@@ -8,6 +8,18 @@ To help automate web development. It can be used as part of a model-driven appro
 
 It may also offer a fresh perspective on things, not least as an example of the monad. The top level code is simpler than might be imagined and worth a look if you're starting out with functional programming and interested in seeing another monad in practice. The module 'utils.js' also has an example of `pipe`.
 
+- [Getting started](#getting-started)
+    - [Cloning the repository & installing dependencies](#cloning-the-repository--installing-dependencies)
+    - [Importing the library](#importing-the-library)
+    - [Working with DOMTrees](#working-with-domtrees)
+- [There's more...](#theres-more)
+    - [.join & .chain](#join--chain)
+    - [.ap & .liftAN](#ap--liftAN)
+- [Making changes](#making-changes)
+    - [Test files](#test-files)
+    - [npm audit](#npm-audit)
+- [Repository tree](#repository-tree)
+
 ## Getting started
 
 If you're comfortable cloning repositories, installing dependencies with npm and using ES modules, skip to [Working with DOMTrees](#working-with-domtrees).
