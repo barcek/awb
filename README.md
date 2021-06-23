@@ -8,6 +8,26 @@ To help automate web development. It can be used as part of a model-driven appro
 
 It may also offer a fresh perspective on things, not least as an example of the monad. The top level code is simpler than might be imagined and worth a look if you're starting out with functional programming and interested in seeing another monad in practice. The module 'utils.js' also has an example of `pipe`.
 
+## How?
+
+Every instance of the `Awb` class has a `.DOMTree` attribute, set when the instance is created (see [Getting started](#getting-started) below).
+
+Every instance of the class also has a `.map` method which can be used to modify its `.DOMTree` attribute, and the `.map` method can be chained, to perform a series of transformations one after the other. The `.map` method takes a handler function which is applied to every element on the DOMTree - the element is passed as the first argument to the function. For now, you write the handlers.
+
+Other methods - [.ap and .liftAN](#ap--liftAN) - allow multiple DOMTrees to be used together, spliced for example.
+
+## So..?
+
+This means that web pages - rather than being typed out in full, or copy-pasted and manually reworked - can be generated, and later regenerated differently.
+
+For example, a basic template for a standard component - a card say - can be passed into an `Awb` instance then multiplied as many times as needed, with the `img` element of each card given an image source and alt text, and with the correct number of `p` elements created for the paragraphs in the text, possibly drawn directly from a text file provided by a client. (If so, remember to validate, sanitize and/or escape the strings.)
+
+New content from the client? The code can be run again, and the time saved can be used to make improvements to the whole. Win-win.
+
+Id's and classes could be added to particular elements for style or functionality, maybe based on a configuration file, and of course position in the tree. Small differences in configuration could create wildly varying designs even with the same handlers and content.
+
+Multiple instances - multiple component trees - can be composed into larger sections - cards into lists say - and eventually into whole pages.
+
 - [Getting started](#getting-started)
     - [Cloning the repository & installing dependencies](#cloning-the-repository--installing-dependencies)
     - [Importing the library](#importing-the-library)
