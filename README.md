@@ -18,15 +18,11 @@ Other methods - [.ap and .liftAN](#ap--liftAN) - allow multiple DOMTrees to be u
 
 ## So..?
 
-This means that web pages - rather than being typed out in full, or copy-pasted and manually reworked - can be generated, and later regenerated differently.
+Rather than being typed out in full or manually reworked, web pages can be generated, and later regenerated differently.
 
-For example, a basic template for a standard component - a card say - can be passed into an `Awb` instance then multiplied as many times as needed, with the `img` element of each card given an image source and alt text, and with the correct number of `p` elements created for the paragraphs in the text, possibly drawn directly from a text file provided by a client. (If so, remember to validate, sanitize and/or escape the strings.)
+For example, a template for a component - a card say - can be passed into an `Awb` instance and multiplied, with the `img` element of each card being given a source and alt text and `p` elements being created for body text, possibly passed directly from a file provided by a client (remembering to validate, sanitize and/or escape the strings). Id's, classes and other attributes can be added to specific elements, possibly based on a configuration file. Small differences in configuration could create wildly varying designs even with the same handlers and content.
 
-New content from the client? The code can be run again, and the time saved can be used to make improvements to the whole. Win-win.
-
-Id's and classes could be added to particular elements for style or functionality, maybe based on a configuration file, and of course position in the tree. Small differences in configuration could create wildly varying designs even with the same handlers and content.
-
-Multiple instances - multiple component trees - can be composed into larger sections - cards into lists say - and eventually into whole pages.
+Multiple such instances can then be combined - cards into lists say - eventually forming whole pages.
 
 - [Getting started](#getting-started)
     - [Cloning the repository & installing dependencies](#cloning-the-repository--installing-dependencies)
