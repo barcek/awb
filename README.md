@@ -34,6 +34,7 @@ Multiple such instances can then be combined - cards into lists say - eventually
 - [Making changes](#making-changes)
     - [Test files](#test-files)
     - [npm audit](#npm-audit)
+- [Development plan](#development-plan)
 - [Repository tree](#repository-tree)
 
 ## Getting started
@@ -138,8 +139,6 @@ The `.liftAN` method can combine multiple uses of `.ap` to apply a function to s
 Awb.of(DOMTree).liftAN(useTrees, instance1, instance2);
 ```
 
-To follow: handlers for the mapping methods and higher-level abstractions.
-
 ## Making changes
 
 Running the tests after making changes and adding tests to cover new behaviour is recommended, as is a regular audit of dependencies.
@@ -169,6 +168,13 @@ The files themselves are in the 'test' folder.
 ### npm audit
 
 The `npm audit` command can be used to run a security audit on the dependencies used, with the process returning information on updates where available. The command `npm audit fix` can be used instead or thereafter to install compatible updates. See the npm documentation for [more detail](https://docs.npmjs.com/auditing-package-dependencies-for-security-vulnerabilities).
+
+## Development plan
+
+- implement a map method handler class
+- provide demo handler instances
+- abstract common patterns
+- add fuller testing
 
 ## Repository tree
 
