@@ -31,6 +31,7 @@ Multiple such instances can then be combined - cards into lists say - eventually
 - [There's more...](#theres-more)
     - [.join & .chain](#join--chain)
     - [.ap & .liftAN](#ap--liftAN)
+- [Growing further](#growing-further)
 - [Making changes](#making-changes)
     - [Test files](#test-files)
     - [npm audit](#npm-audit)
@@ -138,6 +139,10 @@ The `.liftAN` method can combine multiple uses of `.ap` to apply a function to s
 ```js
 Awb.of(DOMTree).liftAN(useTrees, instance1, instance2);
 ```
+
+## Growing further
+
+For generation of multiple pages or larger projects, you could use [thru.js](https://github.com/barcek/thru.js).
 
 ## Making changes
 
