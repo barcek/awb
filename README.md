@@ -176,7 +176,7 @@ The `npm audit` command can be used to run a security audit on the dependencies 
 
 ## Development plan
 
-The following are the expected next steps in the development of the code base. Pull requests are welcome for these and other potential improvements.
+The following are the expected next steps in the development of the code base. The general medium-term aim is a package for procedural webpage generation with a higher-level interface covering common base patterns. Pull requests are welcome for these and other potential improvements.
 
 - implement a map method handler class
 - provide demo handler instances
