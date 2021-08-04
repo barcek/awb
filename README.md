@@ -28,6 +28,8 @@ Multiple such instances can then be combined - cards into lists say - eventually
     - [Cloning the repository & installing dependencies](#cloning-the-repository--installing-dependencies)
     - [Importing the library](#importing-the-library)
     - [Working with DOMTrees](#working-with-domtrees)
+        -[Initializing](#initializing)
+        -[Transforming](#transforming)
 - [There's more...](#theres-more)
     - [.join & .chain](#join--chain)
     - [.ap & .liftAN](#ap--liftAN)
@@ -84,6 +86,8 @@ import('./awb/index.js')
 
 ### Working with DOMTrees
 
+#### Initializing
+
 Seed a new tree with an HTML string or template object passed into the `.sow` method, or use the `.of` method to work with an existing tree.
 
 With an HTML string:
@@ -105,6 +109,8 @@ With an existing DOM tree:
 ```js
 Awb.of(DOMTree);
 ```
+
+#### Transforming
 
 That done, transform away by chaining the `.map` method, passing in a function to be applied to every element in the tree.
 
