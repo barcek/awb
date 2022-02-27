@@ -20,7 +20,9 @@ Other methods - [.ap and .liftAN](#ap--liftAN) - allow multiple DOMTrees to be u
 
 Rather than being typed out in full or manually reworked, web pages can be generated, and later regenerated differently.
 
-For example, a template for a component - a card say - can be passed into an `Awb` instance and multiplied, with the `img` element of each card being given a source and alt text and `p` elements being created for body text, possibly passed directly from a file provided by a client (remembering to validate, sanitize and/or escape the strings). Id's, classes and other attributes can be added to specific elements, possibly based on a configuration file. Small differences in configuration could create wildly varying designs even with the same handlers and content.
+For example, a template for a component - a card say - can be passed into an `Awb` instance and multiplied, with the `img` element of each card being given a source and alt text and `p` elements being created for body text, possibly passed directly from a file provided by a client (remembering to validate, sanitize and/or escape the strings).
+
+Id's, classes and other attributes can be added to specific elements, possibly based on a configuration file. Small differences in configuration could create wildly varying designs even with the same handlers and content.
 
 Multiple such instances can then be combined - cards into lists say - eventually forming whole pages.
 
@@ -28,8 +30,8 @@ Multiple such instances can then be combined - cards into lists say - eventually
     - [Cloning the repository & installing dependencies](#cloning-the-repository--installing-dependencies)
     - [Importing the library](#importing-the-library)
     - [Working with DOMTrees](#working-with-domtrees)
-        -[Initializing](#initializing)
-        -[Transforming](#transforming)
+        - [Initializing](#initializing)
+        - [Transforming](#transforming)
 - [There's more...](#theres-more)
     - [.join & .chain](#join--chain)
     - [.ap & .liftAN](#ap--liftAN)
@@ -184,6 +186,7 @@ The `npm audit` command can be used to run a security audit on the dependencies 
 
 The following are the expected next steps in the development of the code base. The general medium-term aim is a package for procedural webpage generation with a higher-level interface covering common base patterns. Pull requests are welcome for these and other potential improvements.
 
+- allow for use of the library via the command line
 - implement a map method handler class
 - provide demo handler instances
 - abstract common patterns
