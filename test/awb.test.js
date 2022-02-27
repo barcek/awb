@@ -14,7 +14,7 @@ import Awb from '../lib/awb.js';
 
 describe('Awb (constructor)', () => {
 
-    const DOMTree = vals.tree.ify(vals.tmpl.list);
+    const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
     const awbResult = new Awb(DOMTree);
 
     it('returns an instance with the argument in the DOMTree property', () => {
@@ -33,7 +33,7 @@ describe('Awb (constructor)', () => {
     describe('.of (method)', () => {
 
         it('returns an instance with the argument in the DOMTree property', () => {
-            const DOMTree = vals.tree.ify(vals.tmpl.list);
+            const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
             const awbOfResult = Awb.of(DOMTree);
             assert.instanceOf(awbOfResult, Awb);
             assert.equal(awbOfResult.DOMTree, DOMTree);
@@ -91,27 +91,27 @@ describe('Awb (constructor)', () => {
 
             it('returns an instance with no changes made ' +
                 'to the DOMTree property if passed no arguments', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
                 const awbMapEmptyResult = Awb.of(DOMTree).map();
                 assert.equal(awbMapEmptyResult.DOMTree.outerHTML, vals.html.list);
             });
 
             it('returns an instance with the corresponding changes made ' +
                 'to the DOMTree property if passed a function only', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
                 const awbMapResult = Awb.of(DOMTree).map(fns.cAdder);
                 assert.equal(awbMapResult.DOMTree.outerHTML, vals.html.listCAdded);
             });
 
             it('returns an instance with the corresponding changes made ' +
                 'to the DOMTree property if passed a function and false', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
                 const awbMapResult = Awb.of(DOMTree).map(fns.cAdder, false);
                 assert.equal(awbMapResult.DOMTree.outerHTML, vals.html.listCAddedNotTree);
             });
 
             it('returns a function if passed a curried function and false', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
                 const tAppender2 = utils.curryN(fns.tAppender, 1);
                 const awbMapResult = Awb.of(DOMTree).map(tAppender2, false);
                 assert.isFunction(awbMapResult.DOMTree);
@@ -121,7 +121,7 @@ describe('Awb (constructor)', () => {
         describe('.join (method)', () => {
 
             it('returns the DOMTree property', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
                 const awbJoinResult = Awb.of(DOMTree).join();
                 assert.equal(awbJoinResult, DOMTree);
             });
@@ -131,21 +131,21 @@ describe('Awb (constructor)', () => {
 
             it('returns an instance with no changes made ' +
                 'to the DOMTree property if passed a function returning an instance', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
                 const awbChainEmptyResult = Awb.of(DOMTree).chain();
                 assert.equal(awbChainEmptyResult.DOMTree.outerHTML, vals.html.list);
             });
 
             it('returns an instance with the corresponding changes made ' +
                 'to the DOMTree property if passed only a function returning an instance', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
                 const awbChainResult = Awb.of(DOMTree).chain(fns.liftCAdder);
                 assert.equal(awbChainResult.DOMTree.outerHTML, vals.html.listLiftCAdded);
             });
 
             it('returns an instance with the corresponding changes made ' +
                 'to the DOMTree property if passed a function returning an instance and false', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
                 const awbChainResult = Awb.of(DOMTree).chain(fns.liftCAdder, false);
                 assert.equal(awbChainResult.DOMTree.outerHTML, vals.html.listLiftCAddedNotTree);
             });
@@ -156,8 +156,8 @@ describe('Awb (constructor)', () => {
             it('returns an instance with the corresponding changes made ' +
                 'to the DOMTree property if holding a partially applied function & ' +
                 'passed an instance', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
-                const instance = Awb.of(vals.tree.ify(vals.tmpl.list));
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
+                const instance = Awb.of(vals.tree.ifyObj(vals.tmpl.list));
                 const tAppender2 = utils.curryN(fns.tAppender, 1);
                 const awbApResult = Awb.of(DOMTree).map(tAppender2).ap(instance);
                 assert.equal(awbApResult.DOMTree.outerHTML, vals.html.listTAppended2);
@@ -167,8 +167,8 @@ describe('Awb (constructor)', () => {
             it('returns an instance with the corresponding changes made ' +
                 'to the DOMTree property if holding a partially applied function & ' +
                 'passed an instance and false', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
-                const instance = Awb.of(vals.tree.ify(vals.tmpl.list));
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
+                const instance = Awb.of(vals.tree.ifyObj(vals.tmpl.list));
                 const tAppender2 = utils.curryN(fns.tAppender, 1)
                 const awbApResult = Awb.of(DOMTree).map(tAppender2).ap(instance, false);
                 assert.equal(awbApResult.DOMTree.outerHTML, vals.html.listTAppended2NotTree);
@@ -180,9 +180,9 @@ describe('Awb (constructor)', () => {
 
             it('returns an instance with the corresponding changes made ' +
                 'to the DOMTree property if passed a function & multiple instances', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
-                const instance1 = Awb.of(vals.tree.ify(vals.tmpl.list));
-                const instance2 = Awb.of(vals.tree.ify(vals.tmpl.list));
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
+                const instance1 = Awb.of(vals.tree.ifyObj(vals.tmpl.list));
+                const instance2 = Awb.of(vals.tree.ifyObj(vals.tmpl.list));
                 const tAppender3 = utils.curryN(fns.tAppender, 2);
                 const awbLiftANResult = Awb.of(DOMTree).liftAN(tAppender3, instance1, instance2);
                 assert.equal(awbLiftANResult.DOMTree.outerHTML, vals.html.listTAppended3);
@@ -191,9 +191,9 @@ describe('Awb (constructor)', () => {
 
             it('returns an instance with the corresponding changes made ' +
                 'to the DOMTree property if passed a function, multiple instances & false', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
-                const instance1 = Awb.of(vals.tree.ify(vals.tmpl.list));
-                const instance2 = Awb.of(vals.tree.ify(vals.tmpl.list));
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
+                const instance1 = Awb.of(vals.tree.ifyObj(vals.tmpl.list));
+                const instance2 = Awb.of(vals.tree.ifyObj(vals.tmpl.list));
                 const tAppender3 = utils.curryN(fns.tAppender, 2);
                 const awbLiftANResult = Awb.of(DOMTree).liftAN(tAppender3, instance1, instance2, false);
                 assert.equal(awbLiftANResult.DOMTree.outerHTML, vals.html.listTAppended3NotTree);
@@ -203,16 +203,30 @@ describe('Awb (constructor)', () => {
 
         describe('.serialize (method)', () => {
 
-            it('returns the outer HTML of the DOMTree property ' +
-                'without whitespace', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
+            it('returns the outer HTML of a DOMTree property treeified from an HTML string ' +
+                'of indent 2 without whitespace', () => {
+                const DOMTree = vals.tree.ifyHTML(vals.html.listIndent2);
                 const awbSerializeDefaultResult = Awb.of(DOMTree).serialize();
                 assert.equal(awbSerializeDefaultResult, vals.html.list);
             });
 
-            it('returns the outer HTML of the DOMTree property ' +
+            it('returns the outer HTML of a DOMTree property treeified from an HTML string ' +
+                'of indent 2 with the indent passed (4)', () => {
+                const DOMTree = vals.tree.ifyHTML(vals.html.listIndent2);
+                const awbSerializeIndent4Result = Awb.of(DOMTree).serialize(4);
+                assert.equal(awbSerializeIndent4Result, vals.html.listIndent4);
+            });
+
+            it('returns the outer HTML of a DOMTree property treeified from a template object ' +
+                'without whitespace', () => {
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
+                const awbSerializeDefaultResult = Awb.of(DOMTree).serialize();
+                assert.equal(awbSerializeDefaultResult, vals.html.list);
+            });
+
+            it('returns the outer HTML of a DOMTree property treeified from a template object ' +
                 'with the indent passed (4)', () => {
-                const DOMTree = vals.tree.ify(vals.tmpl.list);
+                const DOMTree = vals.tree.ifyObj(vals.tmpl.list);
                 const awbSerializeIndent4Result = Awb.of(DOMTree).serialize(4);
                 assert.equal(awbSerializeIndent4Result, vals.html.listIndent4);
             });

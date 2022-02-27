@@ -5,7 +5,7 @@
 import { JSDOM } from 'jsdom';
 
 import Awb from '../lib/awb.js';
-import { objTreeify } from '../lib/set.js';
+import { HTMLTreeify, objTreeify } from '../lib/set.js';
 
 const dom = new JSDOM('');
 
@@ -26,6 +26,7 @@ const vals = {
         listTAppended2NotTree: '<div><ul id="test-list-1-id" class="test-class-1 test-class-2"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id"><li>Test list 2 item 1 text.</li></ul></li></ul><ul id="test-list-1-id" class="test-class-1 test-class-2 test-class-3"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id"><li>Test list 2 item 1 text.</li></ul></li></ul></div>',
         listTAppended3: '<div><ul id="test-list-1-id" class="test-class-1 test-class-2 test-class-3"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id" class="test-class-3"><li>Test list 2 item 1 text.</li></ul></li></ul><ul id="test-list-1-id" class="test-class-1 test-class-2 test-class-3"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id" class="test-class-3"><li>Test list 2 item 1 text.</li></ul></li></ul><ul id="test-list-1-id" class="test-class-1 test-class-2 test-class-3"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id" class="test-class-3"><li>Test list 2 item 1 text.</li></ul></li></ul></div>',
         listTAppended3NotTree: '<div><ul id="test-list-1-id" class="test-class-1 test-class-2"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id"><li>Test list 2 item 1 text.</li></ul></li></ul><ul id="test-list-1-id" class="test-class-1 test-class-2"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id"><li>Test list 2 item 1 text.</li></ul></li></ul><ul id="test-list-1-id" class="test-class-1 test-class-2 test-class-3"><li>Test list 1 item 1 text.</li><li><ul id="test-list-2-id"><li>Test list 2 item 1 text.</li></ul></li></ul></div>',
+        listIndent2: '<ul id="test-list-1-id" class="test-class-1 test-class-2">\n  <li>Test list 1 item 1 text.</li>\n  <li>\n    <ul id="test-list-2-id">\n      <li>Test list 2 item 1 text.</li>\n    </ul>\n  </li>\n</ul>',
         listIndent4: '<ul id="test-list-1-id" class="test-class-1 test-class-2">\n    <li>Test list 1 item 1 text.</li>\n    <li>\n        <ul id="test-list-2-id">\n            <li>Test list 2 item 1 text.</li>\n        </ul>\n    </li>\n</ul>'
     },
 
@@ -66,7 +67,8 @@ const vals = {
 
     tree: {
 
-        ify: objTreeify
+        ifyHTML: HTMLTreeify,
+        ifyObj: objTreeify
     },
 
     data: {
