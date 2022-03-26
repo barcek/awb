@@ -106,6 +106,15 @@ const utils = {
   Test functions
 */
 
+const incrementBy1 = n => n + 1;
+const double = n => n * 2;
+const square = n => n * n;
+
+const incrementPropNBy1 = obj => {
+  obj.n += 1;
+  return obj;
+};
+
 const cAdder = element => {
   if (element.nodeName === 'UL') {
     element.classList.add('test-class-3');
@@ -135,6 +144,10 @@ const tAppender = (...DOMTrees) => element => {
 };
 
 const fns = {
+  incrementBy1,
+  double,
+  square,
+  incrementPropNBy1,
   cAdder,
   liftCAdder,
   tAppender
