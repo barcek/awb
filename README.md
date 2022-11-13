@@ -36,6 +36,7 @@ Multiple such instances can then be combined - cards into lists say - eventually
     - [.join & .chain](#join--chain)
     - [.ap & .liftAN](#ap--liftAN)
 - [Growing further](#growing-further)
+- [Use via the CLI](#use-via-the-cli)
 - [Making changes](#making-changes)
     - [Test files](#test-files)
     - [npm audit](#npm-audit)
@@ -152,6 +153,10 @@ Awb.of(DOMTree).liftAN(useTrees, instance1, instance2);
 
 For generation of multiple pages or larger projects, you could use [thru.js](https://github.com/barcek/thru.js).
 
+## Use via the CLI
+
+The library can be called via the command line for usage, a list of methods and a `show` option allowing for code inspection. The base command is `node path/to/awb/`.
+
 ## Making changes
 
 Running the tests after making changes and adding tests to cover new behaviour is recommended, as is a regular audit of dependencies.
@@ -200,6 +205,7 @@ The following are the expected next steps in the development of the code base. T
 │   ├── awb.js
 │   ├── get.js
 │   ├── index.js
+│   ├── run.js
 │   ├── set.js
 │   ├── use.js
 │   └── utils.js
