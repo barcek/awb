@@ -72,7 +72,16 @@ const vals = {
   },
 
   data: {
-    hasTAppended: false
+
+    hasTAppended: false,
+    path: 'test/path'
+  },
+
+  code: {
+
+    methodsIO: ['of', 'sow', 'join', 'serialize'],
+    methodsTx: ['map', 'chain', 'ap', 'liftAN'],
+    flagsLong: ['--show']
   }
 };
 
