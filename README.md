@@ -20,23 +20,22 @@ Other methods - [.ap and .liftAN](#ap--liftAN) - allow multiple DOMTrees to be u
 
 Rather than being typed out in full or manually reworked, web pages can be generated, and later regenerated differently.
 
-For example, a template for a component - a card say - can be passed into an `Awb` instance and multiplied, with the `img` element of each card being given a source and alt text and `p` elements being created for body text, possibly passed directly from a file provided by a client (remembering to validate, sanitize and/or escape the strings).
+For example, a template for a component - a card say - can be passed into an `Awb` instance and multiplied, with the sucomponents of each card modified, possibly based on a configuration file, and populated, e.g. from a file provided by a client (remembering to validate, sanitize and/or escape the strings). These can then be combined - into lists say - eventually forming whole pages.
 
-Id's, classes and other attributes can be added to specific elements, possibly based on a configuration file. Small differences in configuration could create wildly varying designs even with the same handlers and content.
-
-Multiple such instances can then be combined - cards into lists say - eventually forming whole pages.
+Small differences in starting values could create wildly varying designs even with the same handlers and content.
 
 - [Getting started](#getting-started)
-    - [Cloning the repository & installing dependencies](#cloning-the-repository--installing-dependencies)
+    - [Cloning & installing](#cloning--installing)
     - [Importing the library](#importing-the-library)
     - [Working with DOMTrees](#working-with-domtrees)
         - [Initializing](#initializing)
         - [Transforming](#transforming)
-- [There's more...](#theres-more)
+- [Growing further](#growing-further)
+  - [Other methods](#other-methods)
     - [.join & .chain](#join--chain)
     - [.ap & .liftAN](#ap--liftAN)
-- [Growing further](#growing-further)
-- [Use via the CLI](#use-via-the-cli)
+  - [Thicker foresting](#thicker-foresting)
+  - [Use via the CLI](#use-via-the-cli)
 - [Making changes](#making-changes)
     - [Test files](#test-files)
     - [npm audit](#npm-audit)
@@ -47,7 +46,7 @@ Multiple such instances can then be combined - cards into lists say - eventually
 
 If you're comfortable cloning repositories, installing dependencies with npm and using ES modules, skip to [Working with DOMTrees](#working-with-domtrees).
 
-### Cloning the repository & installing dependencies
+### Cloning & installing
 
 You'll need Git & npm installed.
 
@@ -127,15 +126,17 @@ Use the `.serialize` method to get the final HTML as a string, passing in an int
 const HTML = Awb.of(DOMTree).serialize(4);
 ```
 
-## There's more...
+## Growing further
 
-### .join & .chain
+### Other methods
+
+#### .join & .chain
 
 The `.DOMTree` property can be accessed directly or via the `.join` method, which unwraps the value from the Awb instance.
 
 The `.chain` method is built from `.map` and `.join` and can be used in place of `.map` where the mapping function instantiates an awb around an element in the DOM tree - the use of `.join` unwraps the value of each such instance once the mapping is complete. If that value is an element, not another level of instance, this flattens the whole tree bar the root element, which is wrapped as it was before the mapping.
 
-### .ap & .liftAN
+#### .ap & .liftAN
 
 The `.ap` method can be used to work with two or more trees, when the value in the instance is a partially applied function requiring one or more additional trees to complete, for example following a use of `.map` with a curried handler. The value in the Awb instance passed to `.ap` becomes the next argument.
 
@@ -149,13 +150,17 @@ The `.liftAN` method can combine multiple uses of `.ap` to apply a function to s
 Awb.of(DOMTree).liftAN(useTrees, instance1, instance2);
 ```
 
-## Growing further
+### Thicker foresting
 
 For generation of multiple pages or larger projects, you could use [thru.js](https://github.com/barcek/thru.js).
 
-## Use via the CLI
+### Use via the CLI
 
-The library can be called via the command line for usage, a list of methods and a `show` option allowing for code inspection. The base command is `node path/to/awb/`.
+The library can be called via the command line to see usage, a list of methods and a `show` option allowing for code inspection. The base command:
+
+```shell
+node path/to/awb
+```
 
 ## Making changes
 
@@ -212,6 +217,7 @@ The following are the expected next steps in the development of the code base. T
 ├── test
 │   ├── awb.test.js
 │   ├── get.test.js
+│   ├── run.test.js
 │   ├── src.test.js
 │   └── utils.test.js
 ├── .gitignore
