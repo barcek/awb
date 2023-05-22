@@ -1,6 +1,6 @@
 {
   "name": "awb",
-  "version": "1.5.3",
+  "version": "1.5.5",
   "description": "monadic DOM tree transformer",
   "main": "index.js",
   "type": "module",
