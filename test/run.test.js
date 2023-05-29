@@ -35,6 +35,11 @@ describe('run.js', () => {
 
     describe('runOutputOptionShow', () => {
 
+      it('logs a string indicating absence if no method matches the array items passed', () => {
+        run(vals.data.path, ['prog', 'file', '--show', 'none'], runLog);
+        assert.include(runLogResult, 'No method found for \'none\'');
+      });
+
       const elements = [')', '{', '/*', '*/', '}'];
 
       it('logs a string being show option output for a single method if passed the corresponding array items', () => {
