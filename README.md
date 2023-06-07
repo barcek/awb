@@ -6,21 +6,21 @@ A library exposing a monad to generate, transform and serialize DOM trees.
 
 To help automate web development. It can be used as part of a model-driven approach with [thru.js](https://github.com/barcek/thru.js), to generate content from HTML thru file methods.
 
-It may also offer a fresh perspective on things, not least as an example of the monad. The top level code is simpler than might be imagined and worth a look if you're starting out with functional programming and interested in seeing another monad in practice. The module 'utils.js' also has an example of `pipe`.
+It could also offer a fresh perspective if you're starting out with functional programming, not least as an example of the monad. The module 'utils.js' also has an implementation of `pipe`.
 
 ## How?
 
 Every instance of the `Awb` class has a `.DOMTree` attribute, set when the instance is created (see [Getting started](#getting-started) below).
 
-Every instance of the class also has a `.map` method which can be used to modify its `.DOMTree` attribute, and the `.map` method can be chained, to perform a series of transformations one after the other. The `.map` method takes a handler function which is applied to every element on the DOMTree - the element is passed as the first argument to the function. For now, you write the handlers.
+Every instance also has a `.map` method which can be used to modify this `.DOMTree` attribute. The method can be chained, to perform a series of transformations. It takes a handler function which is applied to every element on the DOMTree. For now, you write the handlers.
 
 Other methods - [.ap and .liftAN](#ap--liftAN) - allow multiple DOMTrees to be used together, spliced for example.
 
 ## So..?
 
-Rather than being typed out in full or manually reworked, web pages can be generated, and later regenerated differently.
+Rather than being typed out in full and manually reworked, web pages can be generated, and later regenerated differently.
 
-For example, a template for a component - a card say - can be passed into an `Awb` instance and multiplied, with the sucomponents of each card modified, possibly based on a configuration file, and populated, e.g. from a file provided by a client (remembering to validate, sanitize and/or escape the strings). These can then be combined - into lists say - eventually forming whole pages.
+For example, a simple template for a component - a card say - could be passed into an `Awb` instance to be multiplied, modified based on a configuration file and populated from a content source (remembering to validate and/or sanitize), before being combined into a list and inserted into one or more pages.
 
 Small differences in starting values could create wildly varying designs even with the same handlers and content.
 
@@ -28,8 +28,8 @@ Small differences in starting values could create wildly varying designs even wi
     - [Cloning & installing](#cloning--installing)
     - [Importing the library](#importing-the-library)
     - [Working with DOMTrees](#working-with-domtrees)
-        - [Initializing](#initializing)
-        - [Transforming](#transforming)
+        - [Initialization](#initialization)
+        - [Transformation](#transformation)
 - [Growing further](#growing-further)
   - [Other methods](#other-methods)
     - [.join & .chain](#join--chain)
@@ -88,7 +88,7 @@ import('./awb/index.js')
 
 ### Working with DOMTrees
 
-#### Initializing
+#### Initialization
 
 Seed a new tree with an HTML string or template object passed into the `.sow` method, or use the `.of` method to work with an existing tree.
 
@@ -112,13 +112,15 @@ With an existing DOM tree:
 Awb.of(DOMTree);
 ```
 
-#### Transforming
+#### Transformation
 
 That done, transform away by chaining the `.map` method, passing in a function to be applied to every element in the tree.
 
 ```js
 Awb.of(DOMTree).map(handleElement);
 ```
+
+The element is passed to the function as the first argument.
 
 Use the `.serialize` method to get the final HTML as a string, passing in an integer for that number of spaces of indentation.
 
@@ -218,7 +220,9 @@ The following are the expected next steps in the development of the code base. T
 │   ├── awb.test.js
 │   ├── get.test.js
 │   ├── run.test.js
+│   ├── set.test.js
 │   ├── src.test.js
+│   ├── use.test.js
 │   └── utils.test.js
 ├── .gitignore
 ├── LICENSE.txt
