@@ -77,6 +77,12 @@ const vals = {
     path: 'test/path'
   },
 
+  objs: {
+
+    empty: {},
+    withDOMTree: { DOMTree: 'test value' }
+  },
+
   code: {
 
     methodsIO: ['of', 'sow', 'join', 'serialize'],
