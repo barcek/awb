@@ -36,6 +36,7 @@ Small differences in starting values could create wildly varying designs even wi
     - [.ap & .liftAN](#ap--liftAN)
   - [Thicker foresting](#thicker-foresting)
   - [Use via the CLI](#use-via-the-cli)
+    - [Options](#options)
 - [Making changes](#making-changes)
     - [Test files](#test-files)
     - [npm audit](#npm-audit)
@@ -158,11 +159,22 @@ For generation of multiple pages or larger projects, you could use [thru.js](htt
 
 ### Use via the CLI
 
-The library can be called via the command line to see usage, a list of methods and a `show` option allowing for code inspection. The base command:
+The library can also be used from the command line to transform an HTML string, applying a handler exported from a module as the map function and including an optional number of spaces of indentation.
+
+The HTML is piped in, with the module path, export name and number of spaces passed as arguments:
 
 ```shell
-node path/to/awb
+node path/to/awb PATH/TO/MODULE EXPORT[ INDENT]
 ```
+
+The base command `node path/to/awb` can be run to see usage as well as the lists of methods and options.
+
+#### Options
+
+The following can be passed to `node path/to/awb` in place of the transformation arguments:
+
+- `--show` / `-s`  `METHOD/all`, to show code for METHOD or all methods then exit
+- `--help` / `-h`, to show usage, methods and options then exit
 
 ## Making changes
 
