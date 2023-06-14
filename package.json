@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "watch": "mocha --watch --parallel --recursive",
-    "test": "mocha --recursive"
+    "test": "mocha --recursive --exit"
   },
   "keywords": [
     "DOM",

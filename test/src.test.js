@@ -130,6 +130,8 @@ const incrementPropNBy1 = obj => {
   return obj;
 };
 
+const ignore = element => element;
+
 const cAdder = element => {
   if (element.nodeName === 'UL') {
     element.classList.add('test-class-3');
@@ -173,7 +175,11 @@ const fns = {
 */
 
 export {
+
   utils,
   vals,
-  fns
+  fns,
+
+  ignore,
+  cAdder
 };
