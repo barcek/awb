@@ -87,7 +87,8 @@ const vals = {
 
     methodsIO: ['of', 'sow', 'join', 'serialize'],
     methodsTx: ['map', 'chain', 'ap', 'liftAN'],
-    flagsLong: ['--show']
+    flagsWord: ['--show', '--help'],
+    flagsChar: ['-s', '-h']
   }
 };
 
