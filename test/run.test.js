@@ -23,7 +23,7 @@ describe('run.js', () => {
       on: (event, handle) => { handle(vals.html.list) }
     }
 
-    const headings = ['Usage:', 'Methods:', 'Options:'];
+    const headings = ['Usage:', 'Summary:', 'Methods:', 'Options:'];
 
     const assertOutputHelp = () => {
       for(let heading of headings) assert.include(runLogResult, heading);
