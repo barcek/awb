@@ -23,39 +23,46 @@ describe('run.js', () => {
       on: (event, handle) => { handle(vals.html.list) }
     }
 
-    describe('runOutputHelp', () => {
+    const headings = ['Usage:', 'Methods:', 'Options:'];
 
-      const headings = ['Usage:', 'Methods:', 'Options:'];
+    const assertOutputHelp = () => {
+      for(let heading of headings) assert.include(runLogResult, heading);
+      assert.include(runLogResult, vals.data.path);
+      for(let methodIO of vals.code.methodsIO) assert.include(runLogResult, `.${methodIO}(`);
+      for(let methodTx of vals.code.methodsTx) assert.include(runLogResult, methodTx);
+      for(let flagWord of vals.code.flagsWord) assert.include(runLogResult, flagWord);
+      for(let flagChar of vals.code.flagsChar) assert.include(runLogResult, flagChar);
+    }
+
+    describe('runOutputHelp', () => {
 
       it('logs a string being help output if no option flag is passed', () => {
         run(vals.data.path, [], 0, runLog);
-        for(let heading of headings) assert.include(runLogResult, heading);
-        assert.include(runLogResult, vals.data.path);
-        for(let methodIO of vals.code.methodsIO) assert.include(runLogResult, `.${methodIO}(`);
-        for(let methodTx of vals.code.methodsTx) assert.include(runLogResult, methodTx);
-        for(let flagWord of vals.code.flagsWord) assert.include(runLogResult, flagWord);
-        for(let flagChar of vals.code.flagsChar) assert.include(runLogResult, flagChar);
+        assertOutputHelp()
       });
 
       it('logs a string being help output if a help option flag is passed', () => {
 
         run(vals.data.path, ['prog', 'file', '--help'], 0, runLog);
-        for(let heading of headings) assert.include(runLogResult, heading);
-        assert.include(runLogResult, vals.data.path);
-        for(let methodIO of vals.code.methodsIO) assert.include(runLogResult, `.${methodIO}(`);
-        for(let methodTx of vals.code.methodsTx) assert.include(runLogResult, methodTx);
-        for(let flagWord of vals.code.flagsWord) assert.include(runLogResult, flagWord);
-        for(let flagChar of vals.code.flagsChar) assert.include(runLogResult, flagChar);
+        assertOutputHelp()
 
         run(vals.data.path, ['prog', 'file', '-h'], 0, runLog);
-        for(let heading of headings) assert.include(runLogResult, heading);
-        assert.include(runLogResult, vals.data.path);
-        for(let methodIO of vals.code.methodsIO) assert.include(runLogResult, `.${methodIO}(`);
-        for(let methodTx of vals.code.methodsTx) assert.include(runLogResult, methodTx);
-        for(let flagWord of vals.code.flagsWord) assert.include(runLogResult, flagWord);
-        for(let flagChar of vals.code.flagsChar) assert.include(runLogResult, flagChar);
+        assertOutputHelp()
       });
     });
+
+    const elements = [')', '{', '/*', '*/', '}'];
+
+    const assertOutputOptionShowOne = () => {
+      assert.include(runLogResult, 'of(');
+      for(let element of elements) assert.include(runLogResult, element);
+    }
+
+    const assertOutputOptionShowAll = () => {
+      for(let element of elements) assert.include(runLogResult, element);
+      for(let methodIO of vals.code.methodsIO) assert.include(runLogResult, `${methodIO}(`);
+      for(let methodTx of vals.code.methodsTx) assert.include(runLogResult, `${methodTx}(`);
+    }
 
     describe('runOutputOptionShow', () => {
 
@@ -64,30 +71,22 @@ describe('run.js', () => {
         assert.include(runLogResult, 'No method found for \'none\'');
       });
 
-      const elements = [')', '{', '/*', '*/', '}'];
-
       it('logs a string being show option output for a single method if passed the corresponding array items', () => {
 
         run(vals.data.path, ['prog', 'file', '--show', 'of'], 0, runLog);
-        assert.include(runLogResult, 'of(');
-        for(let element of elements) assert.include(runLogResult, element);
+        assertOutputOptionShowOne()
 
         run(vals.data.path, ['prog', 'file', '-s', 'of'], 0, runLog);
-        assert.include(runLogResult, 'of(');
-        for(let element of elements) assert.include(runLogResult, element);
+        assertOutputOptionShowOne()
       });
 
       it('logs a string being show option output for all methods if passed the corresponding array items', () => {
 
         run(vals.data.path, ['prog', 'file', '--show', 'all'], 0, runLog);
-        for(let element of elements) assert.include(runLogResult, element);
-        for(let methodIO of vals.code.methodsIO) assert.include(runLogResult, `${methodIO}(`);
-        for(let methodTx of vals.code.methodsTx) assert.include(runLogResult, `${methodTx}(`);
+        assertOutputOptionShowAll()
 
         run(vals.data.path, ['prog', 'file', '-s', 'all'], 0, runLog);
-        for(let element of elements) assert.include(runLogResult, element);
-        for(let methodIO of vals.code.methodsIO) assert.include(runLogResult, `${methodIO}(`);
-        for(let methodTx of vals.code.methodsTx) assert.include(runLogResult, `${methodTx}(`);
+        assertOutputOptionShowAll()
       });
     });
 
