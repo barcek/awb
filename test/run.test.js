@@ -36,18 +36,43 @@ describe('run.js', () => {
 
     describe('runOutputHelp', () => {
 
-      it('logs a string being help output if no option flag is passed', () => {
-        run(vals.data.path, [], 0, runLog);
-        assertOutputHelp()
+      it('logs a string being help output if no option flag is passed', async () => {
+        await run(vals.data.path, [], 0, runLog);
+        assertOutputHelp();
       });
 
-      it('logs a string being help output if a help option flag is passed', () => {
+      it('logs a string being help output if a help option flag is passed', async () => {
 
-        run(vals.data.path, ['prog', 'file', '--help'], 0, runLog);
-        assertOutputHelp()
+        await run(vals.data.path, ['prog', 'file', '--help'], 0, runLog);
+        assertOutputHelp();
 
-        run(vals.data.path, ['prog', 'file', '-h'], 0, runLog);
-        assertOutputHelp()
+        await run(vals.data.path, ['prog', 'file', '-h'], 0, runLog);
+        assertOutputHelp();
+      });
+    });
+
+    const assertOutputOptionVersion = () => {
+      const name = runLogResult.slice(0, 3);
+      const versionPartCount = runLogResult.slice(5).split('.').length;
+      assert.equal(name, 'awb');
+      assert.equal(versionPartCount, 3);
+    }
+
+    describe('runOutputOptionVersion', () => {
+
+      it('logs a string indicating absence if no version number is found', async () => {
+        await run(vals.data.path, ['prog', 'file', '--version'], 0, runLog);
+        assert.include(runLogResult, 'awb, version unknown - not extracted from');
+        assert.include(runLogResult, 'package.json');
+      });
+
+      it('logs a string being version output if a version option flag is passed', async () => {
+
+        await run(vals.data.path, ['prog', './', '--version'], 0, runLog);
+        assertOutputOptionVersion();
+
+        await run(vals.data.path, ['prog', './', '-v'], 0, runLog);
+        assertOutputOptionVersion();
       });
     });
 
@@ -66,31 +91,31 @@ describe('run.js', () => {
 
     describe('runOutputOptionShow', () => {
 
-      it('logs a string indicating absence if no method matches the array items passed', () => {
-        run(vals.data.path, ['prog', 'file', '--show', 'none'], 0, runLog);
+      it('logs a string indicating absence if no method matches the array items passed', async () => {
+        await run(vals.data.path, ['prog', 'file', '--show', 'none'], 0, runLog);
         assert.include(runLogResult, 'No method found for \'none\'');
       });
 
-      it('logs a string being show option output for a single method if passed the corresponding array items', () => {
+      it('logs a string being show option output for a single method if passed the corresponding array items', async () => {
 
-        run(vals.data.path, ['prog', 'file', '--show', 'of'], 0, runLog);
-        assertOutputOptionShowOne()
+        await run(vals.data.path, ['prog', 'file', '--show', 'of'], 0, runLog);
+        assertOutputOptionShowOne();
 
-        run(vals.data.path, ['prog', 'file', '-s', 'of'], 0, runLog);
-        assertOutputOptionShowOne()
+        await run(vals.data.path, ['prog', 'file', '-s', 'of'], 0, runLog);
+        assertOutputOptionShowOne();
       });
 
-      it('logs a string being show option output for all methods if passed the corresponding array items', () => {
+      it('logs a string being show option output for all methods if passed the corresponding array items', async () => {
 
-        run(vals.data.path, ['prog', 'file', '--show', 'all'], 0, runLog);
-        assertOutputOptionShowAll()
+        await run(vals.data.path, ['prog', 'file', '--show', 'all'], 0, runLog);
+        assertOutputOptionShowAll();
 
-        run(vals.data.path, ['prog', 'file', '-s', 'all'], 0, runLog);
-        assertOutputOptionShowAll()
+        await run(vals.data.path, ['prog', 'file', '-s', 'all'], 0, runLog);
+        assertOutputOptionShowAll();
       });
     });
 
-    describe('runOutputStdin', async () => {
+    describe('runOutputStdin', () => {
 
       it('logs a string indicating absence if passed input and no module path is included in the array items passed', async () => {
         await run(vals.data.path, ['prog', 'file'], 0, runLog, runInput);
