@@ -174,7 +174,8 @@ The base command `node path/to/awb` can be run to see usage as well as the lists
 The following can be passed to `node path/to/awb` in place of the transformation arguments:
 
 - `--show` / `-s`  `METHOD/all`, to show code for METHOD or all methods then exit
-- `--help` / `-h`, to show usage, methods and options then exit
+- `--version` / `-v`, to show name and version number then exit
+- `--help` / `-h`, to show help text, incl. methods, then exit
 
 ## Making changes
 
