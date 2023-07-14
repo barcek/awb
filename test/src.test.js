@@ -87,8 +87,17 @@ const vals = {
 
     methodsIO: ['of', 'sow', 'join', 'serialize'],
     methodsTx: ['map', 'chain', 'ap', 'liftAN'],
-    flagsWord: ['--show', '--version', '--help'],
-    flagsChar: ['-s', '-v', '-h']
+    flagsWord: ['--show', '--link', '--version', '--help'],
+    flagsChar: ['-s', '-l', '-v', '-h'],
+    linkItems: {
+      name: 'awb',
+      mode: '775',
+      text: {
+        prog: '/bin/sh',
+        subs: '$(command -v node)',
+        args: '$1 $2 $3'
+      }
+    }
   }
 };
 
