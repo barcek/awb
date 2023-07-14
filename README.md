@@ -37,6 +37,7 @@ Small differences in starting values could create wildly varying designs even wi
   - [Thicker foresting](#thicker-foresting)
   - [Use via the CLI](#use-via-the-cli)
     - [Options](#options)
+      - [Link file](#link-file)
 - [Making changes](#making-changes)
     - [Test files](#test-files)
     - [npm audit](#npm-audit)
@@ -167,15 +168,26 @@ The HTML is piped in, with the module path, export name and number of spaces pas
 node path/to/awb PATH/TO/MODULE EXPORT[ INDENT]
 ```
 
-The base command `node path/to/awb` can be run to see usage as well as the lists of methods and options.
+Alternatively, an executable link file can be created (see [Options](#options) below) allowing the library to be run from any directory. This is achieved by placing the link file in a directory listed on the `$PATH` environment variable, e.g. '/bin' or '/usr/bin'. With the default link file name, i.e. 'awb':
+
+```shell
+awb PATH/TO/MODULE EXPORT[ INDENT]
+```
+
+The base command `node path/to/awb` - or `awb` with a properly placed default link file - can be run to see usage as well as the lists of methods and options.
 
 #### Options
 
 The following can be passed to `node path/to/awb` in place of the transformation arguments:
 
 - `--show` / `-s`  `METHOD/all`, to show code for METHOD or all methods then exit
+- `--link` / `-l`  `[PATH]`, create link file at path/to/awb/awb or PATH
 - `--version` / `-v`, to show name and version number then exit
 - `--help` / `-h`, to show help text, incl. methods, then exit
+
+##### Link file
+
+The link file is created by default in the root of the project directory with the name `awb`, the mode `775` and a hashbang referencing `/bin/sh`.
 
 ## Making changes
 
